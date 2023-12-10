@@ -3,7 +3,7 @@ import { useSelector, useDispatch, connect } from 'react-redux'
 import { clearData, fetchData, incrementId, decrementId, inputId } from './features/dataSlice'
 import { useEffect } from 'react';
 
-function App(props) {
+function App() {
   const dispatch = useDispatch()
   const data = useSelector((state) => state.data)
 
@@ -14,6 +14,10 @@ function App(props) {
       return <p>image here</p>
     }
   }
+
+  const mapStateToProps = (state) => ({
+    objectId: state.data.objectId
+  })
 
   useEffect(() => {
     dispatch(fetchData())
@@ -39,7 +43,4 @@ function App(props) {
   );
 }
 
-
-const mapStateToProps = (state, ownProps) => ({ objectId: state.data.objectId })
-
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps) (App)
